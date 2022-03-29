@@ -15,7 +15,7 @@ Pour lancer le site, exécuter la commande :
   mvn tomcat7:run
 
 ```
-et enter l'url suivante dans un navigateur:
+et entrer l'url suivante dans un navigateur:
 
 ```web
 
