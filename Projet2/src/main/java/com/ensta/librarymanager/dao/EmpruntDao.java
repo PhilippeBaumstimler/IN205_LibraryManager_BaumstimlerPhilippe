@@ -141,8 +141,8 @@ public class EmpruntDao implements IEmpruntDao {
 	@Override
 	public Emprunt getById(int id) throws DaoException {
 		try (Connection conn = ConnectionManager.getConnection()){
-			PreparedStatement pstmt = conn.prepareStatement("SELECT idMembre\r\n"
-					+ "idLivre, dateEmprunt,\r\n"
+			PreparedStatement pstmt = conn.prepareStatement("SELECT e.id AS idEmprunt, idMembre, nom, prenom, adresse, email,\r\n"
+					+ "telephone, abonnement, idLivre, titre, auteur, isbn, dateEmprunt,\r\n"
 					+ "dateRetour\r\n"
 					+ "FROM emprunt AS e\r\n"
 					+ "INNER JOIN membre ON membre.id = e.idMembre\r\n"
@@ -151,8 +151,8 @@ public class EmpruntDao implements IEmpruntDao {
 			pstmt.setInt(1, id);
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
-			int idLivre = rs.getInt("idLivre");
 			int idMembre = rs.getInt("idMembre");
+			int idLivre = rs.getInt("idLivre");
 			LocalDate dateEmprunt = rs.getDate("dateEmprunt").toLocalDate();
 			LocalDate dateRetour;
 			if(rs.getDate("dateRetour")!=null) {

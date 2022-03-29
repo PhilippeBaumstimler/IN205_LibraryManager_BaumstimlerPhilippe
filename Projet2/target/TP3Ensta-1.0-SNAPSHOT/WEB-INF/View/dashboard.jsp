@@ -23,7 +23,7 @@
         <div class="col l4 s6">
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>${livreCount}</h3> <!-- TODO : afficher le nombre de membres � la place de 12 -->
+              <h3>${membreCount}</h3> <!-- TODO : afficher le nombre de membres � la place de 12 -->
               <p>Membres</p>
             </div>
             <div class="icon">
@@ -35,7 +35,7 @@
         <div class="col l4 s6">
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>27</h3> <!-- TODO : afficher le nombre de livres � la place de 27 -->
+              <h3>${livreCount}</h3> <!-- TODO : afficher le nombre de livres � la place de 27 -->
               <p>Livres</p>
             </div>
             <div class="icon">
@@ -47,7 +47,7 @@
         <div class="col l4 s6">
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>1515</h3> <!-- TODO : afficher le nombre d'emprunts � la place de 1515 -->
+              <h3>${empruntCount}</h3> <!-- TODO : afficher le nombre d'emprunts � la place de 1515 -->
               <p>Emprunts</p>
             </div>
             <div class="icon">
@@ -69,16 +69,24 @@
                     </tr>
                 </thead>
                 <tbody id="results">
-                
+                  <%
+                    int i = 0;
+                    pageContext.setAttribute("i", new Integer(i));
+                  %>
+                  <c:forEach var="emprunt" items="${emprunts}">
                     <tr>
-                        <td>Titre du livre, <em>de Nom de l'auteur</em></td>
-                        <td>Pr�nom et nom du membre emprunteur</td>
-                        <td>Date de l'emprunt</td>
+                        <td><c:out value="${livresEmprunt.get(i).getTitre()}"/> <em>de <c:out value="${livresEmprunt.get(i).getAuteur()}"/></em></td>
+                        <td><c:out value="${membresEmprunt.get(i).getPrenom()}"/> <c:out value="${membresEmprunt.get(i).getNom()}"/></td>
+                        <td><c:out value="${emprunt.getDateEmprunt()}"/></td>
                         <td>
-                            <a href="emprunt_return?id=idDeLEmprunt"><ion-icon class="table-item" name="log-in"></a>
+                            <a href="emprunt_return?id=${emprunt.getId()}"> Retourner le livre <c:out value="${emprunt.getDateRetour()}"/> <ion-icon class="table-item" name="log-in"></a>
                         </td>
+                        <%
+                          i++;
+                          pageContext.setAttribute("i", new Integer(i));
+                        %>
                     </tr>
-                    
+                  </c:forEach>
                      <!-- TODO : parcourir la liste des emprunts en cours et les afficher selon la structure d'exemple ci-dessus -->
                 </tbody>
             </table>

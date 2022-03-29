@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <title>Library Management</title>
   <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -21,22 +21,22 @@
       </div>
       <div class="row">
       <div class="container">
-      <h5>Détails du livre n°${livre.id}</h5>
+      <h5>DÃ©tails du livre nï¿½${livre.getId()}</h5>
         <div class="row">
-	      <form action="/LibraryManager/livre_details?id=idDuLivre" method="post" class="col s12"> <!-- TODO : remplacer idDuLivre par l'id du livre -->
+	      <form action="/TP3Ensta/livre_details?id=${livre.getId()}" method="post" class="col s12"> <!-- TODO : remplacer idDuLivre par l'id du livre -->
 	        <div class="row">
 	          <div class="input-field col s12">
-	            <input id="titre" type="text" value="titreDuLivre" name="titre"> <!-- TODO : remplacer titreDuLivre par le titre du livre -->
+	            <input id="titre" type="text" value="${livre.getTitre()}" name="titre"> <!-- TODO : remplacer titreDuLivre par le titre du livre -->
 	            <label for="titre">Titre</label>
 	          </div>
 	        </div>
 	        <div class="row">
 	          <div class="input-field col s6">
-	            <input id="auteur" type="text" value="auteurDuLivre" name="auteur"> <!-- TODO : remplacer auteurDuLivre par l'auteur du livre -->
+	            <input id="auteur" type="text" value="${livre.getAuteur()}" name="auteur"> <!-- TODO : remplacer auteurDuLivre par l'auteur du livre -->
 	            <label for="auteur">Auteur</label>
 	          </div>
 	          <div class="input-field col s6">
-	            <input id="isbn" type="text" value="isbnDuLivre" name="isbn"> <!-- TODO : remplacer isbnDuLivre par l'isbn du livre -->
+	            <input id="isbn" type="text" value="${livre.getIsbn()}" name="isbn"> <!-- TODO : remplacer isbnDuLivre par l'isbn du livre -->
 	            <label for="isbn">ISBN 13</label>
 	          </div>
 	        </div>
@@ -46,8 +46,8 @@
 	        </div>
 	      </form>
 	      
-	      <form action="/LibraryManager/livre_delete" method="get" class="col s12">
-	        <input type="hidden" value="idDuLivre" name="id"> <!-- TODO : remplacer idDuLivre par l'id du livre -->
+	      <form action="/TP3Ensta/livre_delete" method="get" class="col s12">
+	        <input type="hidden" value="${livre.getId()}" name="id"> <!-- TODO : remplacer idDuLivre par l'id du livre -->
 	        <div class="row center">
 	          <button class="btn waves-effect waves-light red" type="submit">Supprimer le livre
 	            <i class="material-icons right">delete</i>
@@ -66,15 +66,23 @@
                 </tr>
               </thead>
               <tbody id="results">
-
+              <%
+                int i = 0;
+                pageContext.setAttribute("i", new Integer(i));
+              %>
+              <c:forEach var="emprunt" items="${emprunts}">
                 <tr>
-                  <td>Prénom et nom du membre emprunteur</td>
-                  <td>Date de l'emprunt</td>
+                  <td><c:out value="${membres.get(i).getPrenom()}"/> <c:out value="${membres.get(i).getNom()}"/></td>
+                  <td><c:out value="${emprunt.getDateEmprunt()}"/></td>
                   <td>
-                    <a href="emprunt_return?id=idDeLEmprunt"><ion-icon class="table-item" name="log-in"></a>
+                    <a href="emprunt_return?id=idDeLEmprunt"> Retourner le livre <ion-icon class="table-item" name="log-in"></a>
                   </td>
                 </tr>
-
+                <%
+                  i++;
+                  pageContext.setAttribute("i", new Integer(i));
+                %>
+              </c:forEach>
 				<!-- TODO : parcourir la liste des emprunts en cours pour ce livre et les afficher selon la structure d'exemple ci-dessus -->
               </tbody>
             </table>

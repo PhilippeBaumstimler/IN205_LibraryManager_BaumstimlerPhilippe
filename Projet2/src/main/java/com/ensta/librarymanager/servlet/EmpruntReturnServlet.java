@@ -56,11 +56,6 @@ public class EmpruntReturnServlet extends HttpServlet{
 			int ide = Integer.parseInt(id);
 			Emprunt emprunt = this.empruntService.getById(ide);
 			Emprunt e = new Emprunt(emprunt.getId(), emprunt.getIdMembre(), emprunt.getIdLivre(), emprunt.getDateEmprunt(), LocalDate.now());
-			System.out.println(e.getId());
-			System.out.println(e.getIdMembre());
-			System.out.println(e.getIdLivre());
-			System.out.println(e.getDateEmprunt());
-			System.out.println(e.getDateRetour());
 			this.empruntService.returnBook(e);
 			response.sendRedirect("/TP3Ensta/emprunt_list");
 		} catch (ServiceException e) {

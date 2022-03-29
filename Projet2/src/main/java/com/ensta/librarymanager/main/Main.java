@@ -27,6 +27,7 @@ public class Main {
 			Emprunt emprunt = new Emprunt(6, 4, 8, LocalDate.parse("2019-03-11"), LocalDate.now());
 			empruntService.returnBook(emprunt);
 			System.out.println(empruntService.getList());
+			System.out.println(empruntService.getById(6));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}

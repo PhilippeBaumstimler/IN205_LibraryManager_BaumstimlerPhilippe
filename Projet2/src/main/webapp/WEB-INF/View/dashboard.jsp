@@ -79,7 +79,7 @@
                         <td><c:out value="${membresEmprunt.get(i).getPrenom()}"/> <c:out value="${membresEmprunt.get(i).getNom()}"/></td>
                         <td><c:out value="${emprunt.getDateEmprunt()}"/></td>
                         <td>
-                            <a href="emprunt_return?id=idDeLEmprunt"> <c:out value="${emprunt.getDateRetour()}"/> <ion-icon class="table-item" name="log-in"></a>
+                            <a href="emprunt_return?id=${emprunt.getId()}"> Retourner le livre <c:out value="${emprunt.getDateRetour()}"/> <ion-icon class="table-item" name="log-in"></a>
                         </td>
                         <%
                           i++;

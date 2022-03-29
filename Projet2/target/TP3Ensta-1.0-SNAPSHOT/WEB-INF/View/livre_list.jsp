@@ -27,18 +27,18 @@
                         <th>Titre</th>
                         <th>Auteur</th>
                         <th>Code ISBN 13</th>
-                        <th>Détails</th>
+                        <th>Dï¿½tails</th>
                     </tr>
                 </thead>
                 <tbody>
-                
+                  <c:forEach var="livre" items="${livres}">
                     <tr>
-                        <td>Titre du livre</td>
-                        <td>Nom de l'auteur</td>
-                        <td>ISBN du livre</td>
-                        <td class="center"><a href="livre_details?id=idDuLivre"><ion-icon class="details" name="information-circle-outline"></ion-icon></a></td>
+                        <td><c:out value="${livre.getTitre()}" /></td>
+                        <td><c:out value="${livre.getAuteur()}" /></td>
+                        <td><c:out value="${livre.getIsbn()}" /></td>
+                        <td class="center"><a href="livre_details?id=${livre.getId()}"> Cliquez-ici pour plus de dÃ©tails <ion-icon class="details" name="information-circle-outline"></ion-icon></a></td>
                     </tr>
-                    
+                  </c:forEach>
                     <!-- TODO : parcourir la liste des livres et les afficher selon la structure d'exemple ci-dessus -->
                 </tbody>
             </table>

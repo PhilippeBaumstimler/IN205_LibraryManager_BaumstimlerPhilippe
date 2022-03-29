@@ -32,16 +32,32 @@
                     </tr>
                 </thead>
                 <tbody id="results">
-                
-                    <tr>
-                        <td>Titre du livre, <em>de Nom de l'auteur</em></td>
-                        <td>Prénom et nom du membre emprunteur</td>
-                        <td>Date de l'emprunt</td>
-                        <td>
-                            <a href="emprunt_return?id=idDeLEmprunt"><ion-icon class="table-item" name="log-in"></a>
-                        </td>
-                    </tr>
 
+                    <%
+                    int i = 0;
+                    pageContext.setAttribute("i", new Integer(i));
+                    %>
+                    <c:forEach var="emprunt" items="${emprunts}">
+                      <tr>
+                          <td>"<c:out value="${livresEmprunt.get(i).getTitre()}"/>", <em>de <c:out value="${livresEmprunt.get(i).getAuteur()}"/></em></td>
+                          <td><c:out value="${membresEmprunt.get(i).getPrenom()}"/> <c:out value="${membresEmprunt.get(i).getNom()}"/></td>
+                          <td><c:out value="${emprunt.getDateEmprunt()}"/></td>
+                          <td>
+                            <c:if test = "${emprunt.getDateRetour()!=null}">
+                              <c:out value="${emprunt.getDateRetour()}"/>
+                            </c:if>
+                          </td>
+                          <td>
+                            <c:if test = "${emprunt.getDateRetour()==null}">
+                              <a href="emprunt_return?id=${emprunt.getId()}"> Retourner le livre <ion-icon class="table-item" name="log-in"></a>
+                            </c:if>
+                          </td>
+                      </tr>
+                      <%
+                        i++;
+                        pageContext.setAttribute("i", new Integer(i));
+                      %>
+                    </c:forEach>
 					 <!-- TODO : parcourir la liste des emprunts en cours et les afficher selon la structure d'exemple ci-dessus -->
 					 <!-- TODO : dans le champ "retour", afficher la date de retour si elle existe, et un lien vers la page de retour si la date est vide (comme dans l'exemple ci-dessus) -->
                 </tbody>
